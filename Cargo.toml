@@ -1,0 +1,45 @@
+[package]
+name = "transcribe-cli"
+version = "0.0.6"
+edition = "2024"
+rust-version = "1.85"
+description = "Native Rust CLI transcription pipeline with GigaAM v3 ONNX"
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/qwertyu1opz/transcribe-cli"
+keywords = ["transcription", "cli", "audio", "onnx", "gigaam"]
+categories = ["command-line-utilities", "multimedia::audio"]
+
+[features]
+default = []
+gpu = ["ort/cuda"]
+cuda = ["gpu"]
+
+[dependencies]
+anyhow = "1.0.98"
+axum = { version = "0.8.4", features = ["http1", "json", "tokio"] }
+clap = { version = "4.5.39", features = ["derive"] }
+futures-util = "0.3.31"
+indicatif = "0.17.11"
+mel_spec = "0.3.3"
+ndarray = "0.16.1"
+ndarray-npy = "0.9.1"
+ort = { version = "2.0.0-rc.10", default-features = false, features = ["std", "ndarray", "tracing", "load-dynamic"] }
+reqwest = { version = "0.12.15", default-features = false, features = ["json", "rustls-tls", "stream"] }
+rustfft = "6.4.1"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+serde_yaml = "0.9.34"
+symphonia = { version = "0.5.4", features = ["all"] }
+tempfile = "3.19.1"
+tokio = { version = "1.44.2", features = ["fs", "io-util", "macros", "net", "rt-multi-thread", "sync", "time"] }
+tokio-stream = "0.1.17"
+url = "2.5.4"
+zip = { version = "2.4.2", default-features = false, features = ["deflate"] }
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
