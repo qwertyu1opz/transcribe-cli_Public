@@ -2,10 +2,7 @@
 
 `transcribe-cli` is a native Rust transcription tool built around ONNX Runtime.
 
-Crate:
 
-- crates.io: `transcribe-cli`
-- repository: `https://github.com/qwertyu1opz/transcribe-cli`
 
 Current backends:
 
